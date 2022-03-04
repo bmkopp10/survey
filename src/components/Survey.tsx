@@ -1,27 +1,18 @@
-import React, {useMemo, useState} from "react";
+import React, {FormEvent, useState} from "react";
 import {Button, Grid, TextField} from "@mui/material";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import {DatePicker} from "@mui/lab";
 import './Survey.css';
 import ChipField from "./ChipField";
+import {Survey} from "../types";
+import useFormValidator from "../hooks/useFormValidator";
 
 type Props = {}
 
-type Form = {
-    name: string | null;
-    password: string | null;
-    birthday: string | null;
-    preferences: {
-        techPref: "front end" | "back end" | "both" | null
-        pizzaToppings: string[]
-        timezone: string | null;
-    }
-}
+const SurveyComponent: React.FC<Props> = (props) => {
 
-const Survey: React.FC<Props> = (props) => {
-
-    const [formData, setFormData] = useState<Form>({
+    const [formData, setFormData] = useState<Survey>({
         birthday: null,
         preferences: {
             pizzaToppings: [],
@@ -32,19 +23,24 @@ const Survey: React.FC<Props> = (props) => {
         password: null
     })
 
-    const formIsValid = useMemo((): boolean => {
-        if (formData.name) {
-            return true
-        }
-        return false;
-    }, [formData])
+    const { validateForm, validationResult } = useFormValidator('survey')
 
-    const submit = () => {
-        alert('submitting')
+    const submit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        validateForm(formData)
     }
 
     const reset = () => {
-        alert('resetting')
+        setFormData({
+            birthday: null,
+            preferences: {
+                pizzaToppings: [],
+                techPref: null,
+                timezone: null
+            },
+            name: null,
+            password: null
+        })
     }
 
     return (
@@ -93,13 +89,13 @@ const Survey: React.FC<Props> = (props) => {
                 </Grid>
 
             </Grid>
-
+            <span>{JSON.stringify(validationResult)}</span>
             <div className="ButtonRow">
                 <Button variant="contained" type="reset">Reset</Button>
-                <Button variant="contained" type="submit" disabled={!formIsValid}>Submit</Button>
+                <Button variant="contained" type="submit">Submit</Button>
             </div>
         </form>
     )
 }
 
-export default Survey;
+export default SurveyComponent;

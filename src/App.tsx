@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Survey from "./components/Survey";
+import SurveyComponent from "./components/Survey";
 
 function App() {
 
     return (
         <div className="App">
-            <Survey/>
+            <SurveyComponent/>
         </div>
     );
 }
