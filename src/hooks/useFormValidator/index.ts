@@ -50,12 +50,8 @@ export default function useFormValidator<T>(key: FormValidationKey) {
         return false;
     }
 
-    function isRequired(form: any, required?: boolean | keyof any) : boolean {
-        if (typeof required === 'string') {
-            return !!form[required];
-        }
-
-        return !!required;
+    function ifExists(value: unknown) {
+        return value !== null && value !== undefined && value !== ''
     }
 
     async function validateForm(form: T) {
@@ -67,29 +63,60 @@ export default function useFormValidator<T>(key: FormValidationKey) {
             model: {} as ValidationModel<T>
         }
 
-        for (const vr of validationRules) {
+        for (const parent of validationRules) {
             //@ts-ignore
-            const formKeyValue = form[vr.key]
+            const parentValue = form[parent.key]
 
-            if (formKeyValue !== null && formKeyValue !== undefined && formKeyValue !== '') {
+            if (ifExists(parentValue)) {
                 // a value exists, now check it against rules
-                if (vr.rules) {
-                    const error = getFieldError(formKeyValue, vr.rules, form);
+                if (parent.rules) {
+                    const error = getFieldError(parentValue, parent.rules, form);
                     if (error) {
                         //@ts-ignore
-                        validationObj.model[vr.key] = error;
+                        validationObj.model[parent.key] = error;
                         validationObj.errorList.push(error as string)
                         validationObj.isValid = false;
                     }
                 }
             } else {
                 // a value does not exist, check to see if it's required
-                if (isRequired(form, vr.required)) {
-                    const message = (vr.name ? vr.name : camelCaseToLabel(vr.key as string)) + ' is required';
+                if (parent.required) {
+                    const message = (parent.name ? parent.name : camelCaseToLabel(parent.key as string)) + ' is required';
                     //@ts-ignore
-                    validationObj.model[vr.key] = message;
+                    validationObj.model[parent.key] = message;
                     validationObj.errorList.push(message)
                     validationObj.isValid = false;
+                }
+            }
+            // this is duplicate code, needs refactoring
+            if (parent.children) {
+                for (const child of parent.children) {
+                    //@ts-ignore
+                    const childValue = form[parent.key][child.key]
+
+                    if (ifExists(childValue)) {
+
+                        if (child.rules) {
+
+                            const error = getFieldError(childValue, child.rules, form);
+                            if (error) {
+                                //@ts-ignore
+                                validationObj.model[parent.key] = {...validationObj.model[parent.key], [child.key]: error}
+                                validationObj.errorList.push(error as string)
+                                validationObj.isValid = false;
+                            }
+
+                        }
+
+                    } else {
+                        if (child.required) {
+                            const message = (child.name ? child.name : camelCaseToLabel(child.key as string)) + ' is required';
+                            //@ts-ignore
+                            validationObj.model[parent.key] = {...validationObj.model[parent.key], [child.key]: message}
+                            validationObj.errorList.push(message)
+                            validationObj.isValid = false;
+                        }
+                    }
                 }
             }
         }
