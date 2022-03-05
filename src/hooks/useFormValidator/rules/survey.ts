@@ -5,12 +5,14 @@ export const surveyFormRules: Array<ValidationRules<Survey>> = [
     {
         key: 'name',
         required: true,
+        rules: [
+            (value: string) => (value === 'Brian') || 'Your name must be Brian',
+        ]
     },
     {
         key: 'password',
         required: true,
         rules: [
-            //(value: Array<TransactionLine>) => (value.length > 0) || 'Transaction does not have any items',
         ]
     }
 ];

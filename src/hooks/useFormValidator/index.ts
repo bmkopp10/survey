@@ -1,7 +1,7 @@
 import {FormValidationKey, RuleFn, ValidationModel, ValidationResult, ValidationRules} from "./types";
 import {surveyFormRules} from "./rules/survey";
-import {useState} from "react";
 import {camelCaseToLabel} from "../../util/string";
+import {useSyncState} from "../useSyncState";
 
 // use when validation is optional and you need to pass something in so it doesnt break
 // alternative to this is polluting everything with ternaries
@@ -13,7 +13,7 @@ export const emptyValidationResult: ValidationResult<unknown> = {
 
 export default function useFormValidator<T>(key: FormValidationKey) {
 
-    const [validationResult, setValidationResult] = useState<ValidationResult<T>>({
+    const [validationResult, setValidationResult] = useSyncState<ValidationResult<T>>({
         isValid: true,
         errorList: [],
         model: {} as ValidationModel<T>,
@@ -58,7 +58,7 @@ export default function useFormValidator<T>(key: FormValidationKey) {
         return !!required;
     }
 
-    function validateForm(form: T) {
+    async function validateForm(form: T) {
         clearResults();
 
         const validationObj: ValidationResult<T> = {
@@ -93,7 +93,7 @@ export default function useFormValidator<T>(key: FormValidationKey) {
                 }
             }
         }
-        setValidationResult(validationObj)
+        await setValidationResult(validationObj)
     }
 
     return {

@@ -1,5 +1,5 @@
 export type RuleResult = string | boolean
-// how can i use a generic with value?
+// how can I use a generic with value?
 export type RuleFn = (value: any, form: any) => RuleResult
 export type ValidationRules<T> = {
     key: keyof T;

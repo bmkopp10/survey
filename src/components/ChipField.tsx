@@ -38,7 +38,7 @@ const ChipField: React.FC<Props> = (props) => {
         <React.Fragment>
             <TextField label="Pizza Toppings"
                        fullWidth
-                       value={value}
+                       defaultValue={value}
                        variant="standard"
                        onChange={(e) => setValue(e.target.value)}
                        onKeyPress={handleKeyPress}

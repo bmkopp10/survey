@@ -1,4 +1,4 @@
-import React, {FormEvent, useState} from "react";
+import React, {useState} from "react";
 import {Button, Grid, TextField} from "@mui/material";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -25,9 +25,10 @@ const SurveyComponent: React.FC<Props> = (props) => {
 
     const { validateForm, validationResult } = useFormValidator('survey')
 
-    const submit = (event: React.FormEvent<HTMLFormElement>) => {
+    const submit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        validateForm(formData)
+        await validateForm(formData)
+        console.log(validationResult)
     }
 
     const reset = () => {
@@ -52,7 +53,7 @@ const SurveyComponent: React.FC<Props> = (props) => {
                     <TextField label="Name"
                                fullWidth
                                variant="standard"
-                               value={formData.name}
+                               defaultValue={formData.name}
                                onChange={(e) =>
                                    setFormData({...formData, name: e.target.value})}
                     />
@@ -61,7 +62,7 @@ const SurveyComponent: React.FC<Props> = (props) => {
                 <Grid item xs={12} md={6}>
                     <TextField label="Password"
                                fullWidth
-                               value={formData.password}
+                               defaultValue={formData.password}
                                variant="standard"
                                onChange={(e) =>
                                    setFormData({...formData, password: e.target.value})}
