@@ -1,9 +1,8 @@
 import React, {useState} from "react";
-import {Chip, StandardTextFieldProps, TextField} from "@mui/material";
+import {Chip, TextField} from "@mui/material";
 import "./ChipField.css"
 
-// @ts-ignore TODO: why cant i extend this?
-interface Props extends StandardTextFieldProps {
+type Props = {
     value: string[];
     onChange: (value: string[]) => void;
 }

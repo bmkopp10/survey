@@ -1,10 +1,14 @@
 export type Survey = {
-    name: string | null;
-    password: string | null;
+    name: string;
+    password: string;
     birthday: string | null;
-    preferences: {
-        techPref: "front end" | "back end" | "both" | null
-        pizzaToppings: string[]
-        timezone: string | null;
-    }
+    preferences: SurveyPreferences
 }
+
+export type SurveyPreferences = {
+    techPref: TechPref;
+    pizzaToppings: string[];
+    timezone: string | null;
+}
+
+export type TechPref = "front end" | "back end" | "both" | ""
