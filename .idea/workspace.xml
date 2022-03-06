@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="162f36aa-9271-47ee-b054-76646eed02b7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ChipField/ChipField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChipField/ChipField.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Survey/Survey.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Survey/Survey.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/useFormValidator/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useFormValidator/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/useFormValidator/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useFormValidator/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -18,14 +18,22 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="CSS File" />
+        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -51,6 +59,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/tests/useFormValidatorTest" />
+      <recent name="$PROJECT_DIR$/src/tests" />
       <recent name="$PROJECT_DIR$/src/components/Survey" />
       <recent name="$PROJECT_DIR$/src/components/ChipField" />
       <recent name="$PROJECT_DIR$/src/hooks/useFormValidator" />
@@ -71,7 +81,7 @@
       <workItem from="1646359922787" duration="101000" />
       <workItem from="1646360033085" duration="17000" />
       <workItem from="1646360052287" duration="7818000" />
-      <workItem from="1646487488377" duration="22536000" />
+      <workItem from="1646487488377" duration="39117000" />
     </task>
     <servers />
   </component>

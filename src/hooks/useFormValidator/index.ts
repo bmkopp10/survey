@@ -1,7 +1,7 @@
-import {FormValidationKey, RuleFn, ValidationModel, ValidationResult, ValidationRules} from "./types";
-import {surveyFormRules} from "./rules/survey";
+import {FormValidationKey, RuleFn, UseFormValidator, ValidationModel, ValidationResult} from "./types";
 import {camelCaseToLabel} from "../../util/string";
 import {useSyncState} from "../useSyncState";
+import {getValidationRules} from "./helper";
 
 // use when validation is optional and you need to pass something in so it doesnt break
 // alternative to this is polluting everything with ternaries
@@ -11,7 +11,7 @@ export const emptyValidationResult: ValidationResult<unknown> = {
     errorList: []
 }
 
-export default function useFormValidator<T>(key: FormValidationKey) {
+export default function useFormValidator<T>(key: FormValidationKey): UseFormValidator<T> {
 
     const [validationResult, setValidationResult] = useSyncState<ValidationResult<T>>({
         isValid: true,
@@ -28,15 +28,6 @@ export default function useFormValidator<T>(key: FormValidationKey) {
     }
 
     const validationRules = getValidationRules(key);
-
-    function getValidationRules(key: FormValidationKey): Array<ValidationRules<any>> {
-        switch (key) {
-            case 'survey':
-                return surveyFormRules;
-            default:
-                throw new Error('No matching form validation for key: ' + key);
-        }
-    }
 
     function getFieldError(value: string, rules: Array<RuleFn>, form: T): string | boolean {
 
@@ -92,7 +83,7 @@ export default function useFormValidator<T>(key: FormValidationKey) {
             if (parent.children) {
                 for (const child of parent.children) {
                     //@ts-ignore
-                    const childValue = form[parent.key][child.key]
+                    const childValue = ifExists(parentValue) ? form[parent.key][child.key] : null;
 
                     if (ifExists(childValue)) {
 
