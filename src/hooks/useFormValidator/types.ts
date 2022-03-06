@@ -1,3 +1,9 @@
+export type UseFormValidator<T> = {
+    validateForm: (form: T) => void;
+    validationResult: ValidationResult<T>
+    clearResults: () => void;
+}
+
 export type RuleResult = string | boolean
 // how can I use a generic with value?
 export type RuleFn = (value: any, form: any) => RuleResult
