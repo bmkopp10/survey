@@ -3,8 +3,6 @@ import {camelCaseToLabel} from "../../util/string";
 import {useSyncState} from "../useSyncState";
 import {getValidationRules} from "./helper";
 
-// use when validation is optional and you need to pass something in so it doesnt break
-// alternative to this is polluting everything with ternaries
 export const emptyValidationResult: ValidationResult<unknown> = {
     isValid: true,
     model: {},
