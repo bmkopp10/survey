@@ -5,6 +5,8 @@ import "./ChipField.css"
 type Props = {
     value: string[];
     onChange: (value: string[]) => void;
+    helperText?: string;
+    error?: boolean;
 }
 
 const ChipField: React.FC<Props> = (props) => {
@@ -41,6 +43,8 @@ const ChipField: React.FC<Props> = (props) => {
                        variant="standard"
                        onChange={(e) => setValue(e.target.value)}
                        onKeyPress={handleKeyPress}
+                       helperText={props.helperText}
+                       error={props.error}
             />
             <div className="ChipContainer">
                 {props.value.map((data) => {
