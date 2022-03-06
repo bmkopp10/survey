@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="162f36aa-9271-47ee-b054-76646eed02b7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ChipField/ChipField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChipField/ChipField.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Survey/Survey.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Survey/Survey.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useFormValidator/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useFormValidator/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useFormValidator/rules/survey.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useFormValidator/rules/survey.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/useFormValidator/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useFormValidator/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +71,7 @@
       <workItem from="1646359922787" duration="101000" />
       <workItem from="1646360033085" duration="17000" />
       <workItem from="1646360052287" duration="7818000" />
-      <workItem from="1646487488377" duration="16887000" />
+      <workItem from="1646487488377" duration="22536000" />
     </task>
     <servers />
   </component>

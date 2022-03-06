@@ -1,5 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {Autocomplete, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {
+    Autocomplete,
+    Button,
+    FormControl,
+    FormHelperText,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Select,
+    TextField
+} from "@mui/material";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import {DatePicker} from "@mui/lab";
@@ -36,7 +46,7 @@ const SurveyComponent: React.FC<Props> = (props) => {
         initTimezones()
     }, [])
 
-    const {validateForm, validationResult} = useFormValidator<Survey>('survey')
+    const {validateForm, validationResult, clearResults} = useFormValidator<Survey>('survey')
 
     const submit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -57,6 +67,7 @@ const SurveyComponent: React.FC<Props> = (props) => {
             name: '',
             password: ''
         })
+        clearResults()
     }
 
     return (
@@ -114,7 +125,7 @@ const SurveyComponent: React.FC<Props> = (props) => {
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <FormControl fullWidth>
+                    <FormControl fullWidth variant="standard" error={!!validationResult.model.preferences?.techPref}>
                         <InputLabel>Tech Preference</InputLabel>
                         <Select
                             variant="standard"
@@ -127,6 +138,9 @@ const SurveyComponent: React.FC<Props> = (props) => {
                         >
                             {techPreferences.map(p => <MenuItem value={p} key={p}>{p}</MenuItem>)}
                         </Select>
+                        {!!validationResult.model.preferences?.techPref &&
+                            <FormHelperText error>{validationResult.model.preferences?.techPref}</FormHelperText>
+                        }
                     </FormControl>
                 </Grid>
 
@@ -151,8 +165,14 @@ const SurveyComponent: React.FC<Props> = (props) => {
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <ChipField value={formData.preferences.pizzaToppings} onChange={(value) =>
-                        setFormData({...formData, preferences: {...formData.preferences, pizzaToppings: value}})}/>
+                    <ChipField
+                        value={formData.preferences.pizzaToppings}
+                        onChange={(value) =>
+                            setFormData({...formData, preferences: {...formData.preferences, pizzaToppings: value}})
+                        }
+                        helperText={validationResult.model.preferences?.pizzaToppings}
+                        error={!!validationResult.model.preferences?.pizzaToppings}
+                    />
                 </Grid>
 
             </Grid>
