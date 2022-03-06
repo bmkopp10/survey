@@ -26,13 +26,8 @@ export type ValidationResult<T> = {
     model: ValidationModel<T>
 }
 
-//export type ValidationModel<T> = Record<keyof T, string>
-
-//export type ValidationModel<T> = Record<keyof T, string | Record<keyof T[keyof T], string>>
-
 // TODO: how to recursively get key of child objects and assign string to them?
 export type ValidationModel<T> = Record<keyof T, string | any>
-
 
 export type FormValidationKey =
     'survey'
