@@ -13,11 +13,12 @@ import {
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import {DatePicker} from "@mui/lab";
-import './Survey.css';
+import styles from './Survey.module.css';
 import ChipField from "../ChipField/ChipField";
 import {Survey, TechPref} from "../../types";
 import useFormValidator from "../../hooks/useFormValidator";
-import {getTimezones} from "../../modules/api";
+import {getTimezones, submitSurvey} from "../../modules/api";
+import TitleText from "../TitleText/TitleText";
 
 type Props = {}
 
@@ -36,6 +37,8 @@ const SurveyComponent: React.FC<Props> = (props) => {
         password: ''
     })
 
+    const [submitting, setSubmitting] = useState<boolean>(false)
+
     const [timezones, setTimezones] = useState<string[]>([])
 
     useEffect(() => {
@@ -52,7 +55,10 @@ const SurveyComponent: React.FC<Props> = (props) => {
         event.preventDefault();
         await validateForm(formData)
         if (validationResult.isValid) {
-            console.log(validationResult)
+            setSubmitting(true)
+            const success = await submitSurvey(formData)
+            if (success) reset()
+            setSubmitting(false)
         }
     }
 
@@ -71,17 +77,16 @@ const SurveyComponent: React.FC<Props> = (props) => {
     }
 
     return (
-        <form onSubmit={submit} onReset={reset} className="Form">
+        <form onSubmit={submit} onReset={reset} className={styles.Form}>
 
-            <span className="Title">Survey</span>
+            <TitleText text="Survey"/>
 
-            <Grid container spacing={5}>
+            <Grid container spacing={5} className={styles.FormBody}>
                 <Grid item xs={12} md={6}>
                     <TextField label="Name"
                                fullWidth
                                helperText={validationResult.model.name}
                                error={!!validationResult.model.name}
-                               variant="standard"
                                defaultValue={formData.name}
                                onChange={(e) =>
                                    setFormData({...formData, name: e.target.value})}
@@ -94,7 +99,6 @@ const SurveyComponent: React.FC<Props> = (props) => {
                                defaultValue={formData.password}
                                helperText={validationResult.model.password}
                                error={!!validationResult.model.password}
-                               variant="standard"
                                onChange={(e) =>
                                    setFormData({...formData, password: e.target.value})}
                                inputProps={{
@@ -114,7 +118,6 @@ const SurveyComponent: React.FC<Props> = (props) => {
                             }}
                             renderInput={(params) =>
                                 <TextField {...params}
-                                           variant="standard"
                                            fullWidth
                                            helperText={validationResult.model.birthday}
                                            error={!!validationResult.model.birthday}
@@ -125,10 +128,9 @@ const SurveyComponent: React.FC<Props> = (props) => {
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <FormControl fullWidth variant="standard" error={!!validationResult.model.preferences?.techPref}>
+                    <FormControl fullWidth error={!!validationResult.model.preferences?.techPref}>
                         <InputLabel>Tech Preference</InputLabel>
                         <Select
-                            variant="standard"
                             value={formData.preferences.techPref}
                             label="Tech Preference"
                             onChange={(event) => setFormData({
@@ -159,7 +161,6 @@ const SurveyComponent: React.FC<Props> = (props) => {
                                 error={!!validationResult.model.preferences?.timezone}
                                 {...params}
                                 label="Timezone"
-                                variant="standard"
                             />}
                     />
                 </Grid>
@@ -176,9 +177,9 @@ const SurveyComponent: React.FC<Props> = (props) => {
                 </Grid>
 
             </Grid>
-            <div className="ButtonRow">
-                <Button variant="contained" type="reset">Reset</Button>
-                <Button variant="contained" type="submit">Submit</Button>
+            <div className={styles.ButtonRow}>
+                <Button color="info" variant="text" type="reset" disabled={submitting}>Reset</Button>
+                <Button color="secondary" type="submit">Submit</Button>
             </div>
         </form>
     )
