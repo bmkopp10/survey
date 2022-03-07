@@ -1,13 +1,19 @@
 import React from 'react';
-import './App.css';
+import styles from './App.module.css';
 import SurveyComponent from "./components/Survey/Survey";
+import Header from "./components/Header/Header";
+import {ThemeProvider} from "@mui/material";
+import {theme} from "./theme";
 
 function App() {
 
     return (
-        <div className="App">
-            <SurveyComponent/>
-        </div>
+        <ThemeProvider theme={theme}>
+            <div className={styles.App}>
+                <Header title="Code Challenge"/>
+                <SurveyComponent/>
+            </div>
+        </ThemeProvider>
     );
 }
 

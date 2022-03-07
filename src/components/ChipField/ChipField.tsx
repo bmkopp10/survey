@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Chip, TextField} from "@mui/material";
-import "./ChipField.css"
+import styles from "./ChipField.module.css"
 
 type Props = {
     value: string[];
@@ -46,10 +46,10 @@ const ChipField: React.FC<Props> = (props) => {
                        helperText={props.helperText}
                        error={props.error}
             />
-            <div className="ChipContainer">
+            <div className={styles.ChipContainer}>
                 {props.value.map((data) => {
                     return (
-                        <div className="Chip" key={data}>
+                        <div className={styles.Chip} key={data}>
                             <Chip
                                 label={data}
                                 onDelete={() => deleteChip(data)}

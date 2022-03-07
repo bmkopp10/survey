@@ -21,7 +21,7 @@ export const surveyFormRules: Array<ValidationRules<Survey>> = [
         required: true,
         rules: [
             (value: string) => (new Date(value).getFullYear() > 1930) || "You're too old to take this survey",
-            (value: string) => (new Date(value).getFullYear() > 2023) || "You're not even born yet",
+            (value: string) => (new Date(value).getFullYear() < 2023) || "You're not even born yet",
         ]
     },
     {

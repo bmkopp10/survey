@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="162f36aa-9271-47ee-b054-76646eed02b7" name="Changes" comment="" />
+    <list default="true" id="162f36aa-9271-47ee-b054-76646eed02b7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ChipField/ChipField.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChipField/ChipField.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ChipField/ChipField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ChipField/ChipField.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Survey/Survey.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Survey/Survey.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Survey/Survey.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Survey/Survey.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/useFormValidator/rules/survey.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useFormValidator/rules/survey.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/api/index.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,8 +25,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="TypeScript JSX File" />
+        <option value="CSS File" />
         <option value="TypeScript File" />
       </list>
     </option>
@@ -76,7 +88,7 @@
       <workItem from="1646359922787" duration="101000" />
       <workItem from="1646360033085" duration="17000" />
       <workItem from="1646360052287" duration="7818000" />
-      <workItem from="1646487488377" duration="39419000" />
+      <workItem from="1646487488377" duration="48619000" />
     </task>
     <servers />
   </component>
