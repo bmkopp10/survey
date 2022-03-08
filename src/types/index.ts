@@ -12,3 +12,5 @@ export type SurveyPreferences = {
 }
 
 export type TechPref = "front end" | "back end" | "both" | ""
+
+export type PizzaTopping = 'cheese' | 'pepperoni' | 'sausage' | 'mushroom' | 'onion' | 'green pepper'
