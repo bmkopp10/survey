@@ -1,30 +1,25 @@
 import React, {useEffect, useState} from "react";
 import {
     Autocomplete,
-    Button,
-    FormControl,
-    FormHelperText,
-    Grid,
-    InputLabel,
-    MenuItem,
-    Select,
+    Button, Checkbox,
+    FormControl, FormControlLabel, FormGroup,
+    FormHelperText, FormLabel,
+    Grid, Radio, RadioGroup,
     TextField
 } from "@mui/material";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import {DatePicker} from "@mui/lab";
 import styles from './Survey.module.css';
-import ChipField from "../ChipField/ChipField";
-import {Survey, TechPref} from "../../types";
+import {PizzaTopping, Survey, TechPref} from "../../types";
 import useFormValidator from "../../hooks/useFormValidator";
 import {getTimezones, submitSurvey} from "../../modules/api";
 import TitleText from "../TitleText/TitleText";
 
-type Props = {}
-
-const SurveyComponent: React.FC<Props> = (props) => {
+const SurveyComponent: React.FC = () => {
 
     const techPreferences: TechPref[] = ['both', 'front end', 'back end']
+    const pizzaToppingOptions: PizzaTopping[] = ['cheese', 'pepperoni', 'sausage', 'green pepper', 'onion', 'mushroom']
 
     const [formData, setFormData] = useState<Survey>({
         birthday: '',
@@ -74,6 +69,17 @@ const SurveyComponent: React.FC<Props> = (props) => {
             password: ''
         })
         clearResults()
+    }
+
+    const handleChangePizzaTopping = (topping: PizzaTopping) => {
+        const pizzaToppings = [...formData.preferences.pizzaToppings]
+        const index = pizzaToppings.findIndex(t => t === topping)
+        if (index > -1) {
+            pizzaToppings.splice(index, 1)
+        } else {
+            pizzaToppings.push(topping)
+        }
+        setFormData({...formData, preferences: {...formData.preferences, pizzaToppings}})
     }
 
     return (
@@ -128,18 +134,18 @@ const SurveyComponent: React.FC<Props> = (props) => {
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <FormControl fullWidth error={!!validationResult.model.preferences?.techPref}>
-                        <InputLabel>Tech Preference</InputLabel>
-                        <Select
+                    <FormControl error={!!validationResult.model.preferences?.techPref}>
+                        <FormLabel>Tech Preferences</FormLabel>
+                        <RadioGroup
+                            row
                             value={formData.preferences.techPref}
-                            label="Tech Preference"
                             onChange={(event) => setFormData({
                                 ...formData,
                                 preferences: {...formData.preferences, techPref: event.target.value as TechPref}
                             })}
                         >
-                            {techPreferences.map(p => <MenuItem value={p} key={p}>{p}</MenuItem>)}
-                        </Select>
+                            {techPreferences.map(pref => <FormControlLabel value={pref} control={<Radio />} label={pref} key={pref} />)}
+                        </RadioGroup>
                         {!!validationResult.model.preferences?.techPref &&
                             <FormHelperText error>{validationResult.model.preferences?.techPref}</FormHelperText>
                         }
@@ -166,14 +172,33 @@ const SurveyComponent: React.FC<Props> = (props) => {
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <ChipField
-                        value={formData.preferences.pizzaToppings}
-                        onChange={(value) =>
-                            setFormData({...formData, preferences: {...formData.preferences, pizzaToppings: value}})
-                        }
-                        helperText={validationResult.model.preferences?.pizzaToppings}
+
+                    <FormControl
                         error={!!validationResult.model.preferences?.pizzaToppings}
-                    />
+                        component="fieldset"
+                        variant="standard"
+                    >
+                        <FormLabel component="legend">Pizza Toppings</FormLabel>
+                        <FormGroup>
+                            <Grid container>
+                                {pizzaToppingOptions.map(topping =>
+                                    <Grid item xs={6} key={topping}>
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    checked={formData.preferences.pizzaToppings.includes(topping)}
+                                                    onChange={() => handleChangePizzaTopping(topping)} name={topping}
+                                                />
+                                            }
+                                            label={topping}
+                                        />
+                                    </Grid>)}
+                            </Grid>
+                        </FormGroup>
+                        {validationResult.model.preferences?.pizzaToppings &&
+                            <FormHelperText>{validationResult.model.preferences?.pizzaToppings}</FormHelperText>
+                        }
+                    </FormControl>
                 </Grid>
 
             </Grid>
